@@ -11,6 +11,9 @@ public class ClienteDeObjetos{
         System.out.println("Cual es la direccion ip donde se encuentra el rmiREgistry");
         direccionIpRMIRegistry = cliente.UtilidadesConsola.leerCadena();
         System.out.println("Cual es el numero de puerto por el cual escucha el rmiREgistry");
-        numPuertoRMIRegistry = cliente.UtilidadesConsola.leerCadena();
+        numPuertoRMIRegistry = cliente.UtilidadesConsola.leerEntero();
+
+        objRemoto = (GesUsuarioInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry,numPuertoRMIRegistry,"ObjetoRemotoPersonal");
+        MenuPrincipal();
     }
 }
