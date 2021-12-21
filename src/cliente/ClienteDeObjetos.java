@@ -53,12 +53,87 @@ public class ClienteDeObjetos{
         try
         {
             System.out.println("==Registro del Cliente==");
-            System.out.println("Ingrese la identificacion");
-            int id = UtilidadesConsola.leerEntero();
+
+            int opcionTI = 0;
+            String varTipoIdentificacion="";
+            do
+                {
+                System.out.println("==TIPO DE IDENTIFICACION==");
+                System.out.println("1. Cedula de Ciudadania");			
+                System.out.println("2. Tarjeta de Identidad");
+                System.out.println("3. Pasaporte");
+                
+
+                opcionTI = UtilidadesConsola.leerEntero();
+
+                switch(opcion)
+                {
+                    case 1:
+                            varTipoIdentificacion="CC"
+                            break;
+                    case 2:
+                            varTipoIdentificacion="TI"
+                            break;	
+                    case 3:
+                            varTipoIdentificacion="PP"
+                            break;
+                    default:
+                            System.out.println("Opción incorrecta");
+                }
+
+            }while(opcionTI != -1);
+
+            System.out.println("Ingrese el numero de identificacion");
+            int varId = UtilidadesConsola.leerEntero();
+            if (id < 0){
+                bandera = true;
+            }
+
             System.out.println("Ingrese el nombre completo ");
-            String nombres = UtilidadesConsola.leerCadena();
-            System.out.println("Ingrese los apellidos ");
-            String apellidos = UtilidadesConsola.leerCadena();
+            String varNombres = UtilidadesConsola.leerCadena();
+
+            System.out.println("Ingrese la ocupacion del nuevo usuario ");
+            String varOcupacion="";
+             do
+                {
+                System.out.println("==TIPO DE OCUPACION==");
+                System.out.println("1. Secretaria");			
+                System.out.println("2. Profesional de acondicionamiento fisico");
+                
+
+                opcionTI = UtilidadesConsola.leerEntero();
+
+                switch(opcion)
+                {
+                    case 1:
+                            varOcupacion="Secretaria"
+                            break;
+                    case 2:
+                            varOcupacion="Personal de acondicioamiento fisico"
+                            break;	
+
+                    default:
+                            System.out.println("Opción incorrecta");
+                }
+
+            }while(opcionTI != -1);
+
+        
+
+            System.out.println("Ingrese el usuario ");
+            String varUsuario = UtilidadesConsola.leerCadena();
+
+            if (varUsuario<8){
+                bandera=true;
+            }
+
+
+            System.out.println("Ingrese la contraseña ");
+            String varContraseña = UtilidadesConsola.leerCadena();
+
+            if (varContraseña<8){
+                bandera=true;
+            }
             UsuarioDTO objUsuario= new UsuarioDTO(id, nombres, apellidos);
 
             boolean valor = objRemoto.registrarUsuario(objUsuario);//invocación al método remoto
