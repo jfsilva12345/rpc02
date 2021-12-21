@@ -24,10 +24,9 @@ public class ClienteDeObjetos{
         do
         {
             System.out.println("==Menu==");
-            System.out.println("1. Registrar Usuario");			
-            System.out.println("2. Consultar Cantidad de Usuarios");
-            System.out.println("3. Consultar usuario");
-            System.out.println("4. Salir");
+            System.out.println("1. Registrar personal");			
+            System.out.println("2. Consultar personal");
+            System.out.println("3. Salir");
 
             opcion = UtilidadesConsola.leerEntero();
 
@@ -40,9 +39,6 @@ public class ClienteDeObjetos{
                         Opcion2();
                         break;	
                 case 3:
-                        Opcion3();
-                        break;
-                case 4:
                         System.out.println("Salir...");
                         break;
                 default:
@@ -92,26 +88,4 @@ public class ClienteDeObjetos{
         }	
     }
 
-    private static void Opcion3() 
-    {
-        try
-        {
-            System.out.println("==Consulta de un Cliente==");
-            System.out.println("Ingrese la identificacion");
-            int id = UtilidadesConsola.leerEntero();			
-
-            UsuarioDTO objUsuario= objRemoto.consultarUsuario(id);
-            if(objUsuario!=null)
-            {
-                    System.out.println("Nombres: " + objUsuario.getNombres());
-                    System.out.println("Apellidos: " + objUsuario.getApellidos());
-            }
-            else
-                    System.out.println("Usuario no encontrado");
-        }
-        catch(RemoteException e)
-        {
-            System.out.println("La operacion no se pudo completar, intente nuevamente...");
-        }
-    }
 }
