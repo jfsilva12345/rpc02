@@ -75,11 +75,19 @@ public class ClienteDeObjetos{
 
     private static void Opcion2()
     {	
+        int id = -1;
         try
         {
-            System.out.println("==Numero de usuarios==");
-            int tamanio  = objRemoto.consultarCantidadUsuarios();
-            System.out.println("El numero de usuarios registrados es de: "+ tamanio);
+            System.out.println("========================");
+            System.out.println("==Consulta de personal==");
+            System.out.println("========================");
+
+            System.out.println("Digite el id del personal a buscar");
+
+            id = UtilidadesConsola.leerEntero();
+
+            PersonalDTO personal  = objRemoto.consultarPersonal(id);
+            System.out.println();
         }
         catch(RemoteException e)
         {
