@@ -33,10 +33,9 @@ public class GesUsuariosImpl extends UnicastRemoteObject implements GesUsuariosI
         System.out.println("Entrando a consultar usuario");
         UsuarioDTO objUsuario=null;
         
-        for (int i = 0; i < this.misUsuarios.size(); i++) {
-            if(this.misUsuarios.get(i).getID()==identificacion)
-            {
-                objUsuario=this.misUsuarios.get(i);
+        for(PersonalDTO personal : usuarios){
+            if(usuarios.get(i).getID()==identificacion){
+                objUsuario=usuarios.get(i);
                 break;
             }
         }

@@ -161,8 +161,12 @@ public class ClienteDeObjetos{
 
             id = UtilidadesConsola.leerEntero();
 
-            PersonalDTO personal  = objRemoto.consultarPersonal(id);
-            System.out.println();
+            PersonalDTO personal  = objRemoto.consultarUsuario(id);
+            System.out.println(personal.getTipo_id());
+            System.out.println(personal.getId());
+            System.out.println(personal.getUsuario());
+            System.out.println(personal.getNombreCompleto());
+            System.out.println(personal.getOcupacion());
         }
         catch(RemoteException e)
         {
