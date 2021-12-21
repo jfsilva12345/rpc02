@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicasRemoteObject;
 import java.util.ArrayList;
 
-public class GesUsuariosImpl extends UnicasRemoteObject implements GesUsuariosInt{
+public class GesUsuariosImpl extends UnicastRemoteObject implements GesUsuariosInt{
     private ArrayList<UsuarioDTO> usuarios;
     private int contador=0;
     
