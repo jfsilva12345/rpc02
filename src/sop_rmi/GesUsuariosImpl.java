@@ -10,7 +10,7 @@ public class GesUsuariosImpl extends UnicastRemoteObject implements GesUsuariosI
     
     public GesUsuariosImpl() throws RemoteException{
         super();
-        this.usuarios = new ArrayList();
+        this.personal = new ArrayList();
     }
 
     @Override
@@ -31,14 +31,16 @@ public class GesUsuariosImpl extends UnicastRemoteObject implements GesUsuariosI
     public PersonalDTO consultarPersonal(int id) throws RemoteException{
         
         System.out.println("Entrando a consultar usuario");
-        UsuarioDTO objUsuario=null;
-        
-        for (int i = 0; i < this.personal.size(); i++) {
-            if(this.misUsuarios.get(i).getID()==identificacion)
-            {
-                objUsuario=this.personal.get(i);
+        PersonalDTO objUsuario=null;
+        int contador = 0;
+        for(PersonalDTO varPersonal : personal){
+            if(personal.get(contador).getId()==id){
+                
+                objUsuario=personal.get(contador);
+
                 break;
             }
+            contador++;
         }
         return objUsuario;  
     }
