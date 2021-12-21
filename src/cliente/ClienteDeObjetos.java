@@ -1,6 +1,8 @@
 package cliente;
 
 import sop_rmi.GesUsuariosInt;
+import sop_rmi.PersonalDTO;
+import java.rmi.RemoteException;
 
 public class ClienteDeObjetos{
     private static GesUsuariosInt objRemoto;
@@ -13,7 +15,7 @@ public class ClienteDeObjetos{
         System.out.println("Cual es el numero de puerto por el cual escucha el rmiREgistry");
         numPuertoRMIRegistry = cliente.UtilidadesConsola.leerEntero();
 
-        objRemoto = (GesUsuarioInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry,numPuertoRMIRegistry,"ObjetoRemotoPersonal");
+        objRemoto = (GesUsuariosInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry,numPuertoRMIRegistry,"ObjetoRemotoPersonal");
         MenuPrincipal();
     }
     
@@ -21,6 +23,7 @@ public class ClienteDeObjetos{
     private static void MenuPrincipal()
     {
         int opcion = 0;
+        
         do
         {
             System.out.println("==Menu==");
@@ -53,39 +56,33 @@ public class ClienteDeObjetos{
         try
         {
             System.out.println("==Registro del Cliente==");
-
+            boolean bandera=false;
             int opcionTI = 0;
             String varTipoIdentificacion="";
-            do
-                {
+
                 System.out.println("==TIPO DE IDENTIFICACION==");
                 System.out.println("1. Cedula de Ciudadania");			
                 System.out.println("2. Tarjeta de Identidad");
                 System.out.println("3. Pasaporte");
                 
 
+
                 opcionTI = UtilidadesConsola.leerEntero();
 
-                switch(opcion)
-                {
-                    case 1:
-                            varTipoIdentificacion="CC"
-                            break;
-                    case 2:
-                            varTipoIdentificacion="TI"
-                            break;	
-                    case 3:
-                            varTipoIdentificacion="PP"
-                            break;
-                    default:
-                            System.out.println("Opción incorrecta");
+                if(opcionTI==1){
+                    varTipoIdentificacion="CC";
+                }else if(opcionTI==2){
+                    varTipoIdentificacion="TI";
+                }else if(opcionTI==3){
+                    varTipoIdentificacion="PP";
+                }else{
+                    bandera=true;
                 }
 
-            }while(opcionTI != -1);
 
             System.out.println("Ingrese el numero de identificacion");
             int varId = UtilidadesConsola.leerEntero();
-            if (id < 0){
+            if (varId < 0){
                 bandera = true;
             }
 
@@ -94,8 +91,7 @@ public class ClienteDeObjetos{
 
             System.out.println("Ingrese la ocupacion del nuevo usuario ");
             String varOcupacion="";
-             do
-                {
+
                 System.out.println("==TIPO DE OCUPACION==");
                 System.out.println("1. Secretaria");			
                 System.out.println("2. Profesional de acondicionamiento fisico");
@@ -103,44 +99,47 @@ public class ClienteDeObjetos{
 
                 opcionTI = UtilidadesConsola.leerEntero();
 
-                switch(opcion)
-                {
-                    case 1:
-                            varOcupacion="Secretaria"
-                            break;
-                    case 2:
-                            varOcupacion="Personal de acondicioamiento fisico"
-                            break;	
 
-                    default:
-                            System.out.println("Opción incorrecta");
+                if(opcionTI==1){
+                    varTipoIdentificacion="Secretaria";
+                }else if(opcionTI==2){
+                    varTipoIdentificacion="Personal de acondicioamiento fisico";
+                }else{
+                    bandera=true;
                 }
 
-            }while(opcionTI != -1);
+
 
         
 
             System.out.println("Ingrese el usuario ");
             String varUsuario = UtilidadesConsola.leerCadena();
 
-            if (varUsuario<8){
+            if (varUsuario.length()<8){
                 bandera=true;
             }
 
 
             System.out.println("Ingrese la contraseña ");
-            String varContraseña = UtilidadesConsola.leerCadena();
+            String varClave = UtilidadesConsola.leerCadena();
 
-            if (varContraseña<8){
+            if (varClave.length()<8){
                 bandera=true;
             }
-            UsuarioDTO objUsuario= new UsuarioDTO(id, nombres, apellidos);
+            if(!bandera){
 
-            boolean valor = objRemoto.registrarUsuario(objUsuario);//invocación al método remoto
-            if(valor)
-                    System.out.println("Registro realizado satisfactoriamente...");
-            else
-                    System.out.println("no se pudo realizar el registro...");
+                PersonalDTO objUsuario= new PersonalDTO(varTipoIdentificacion, varId, varNombres,varOcupacion,varUsuario,varClave);
+
+                boolean valor = objRemoto.registrarPersonal(objUsuario);//invocación al método remoto
+                if(valor)
+                        System.out.println("Registro realizado satisfactoriamente...");
+                else
+                        System.out.println("no se pudo realizar el registro...");
+
+            }else{
+                System.out.println("datos erroneos");
+            }
+           
         }
         catch(RemoteException e)
         {
@@ -161,7 +160,7 @@ public class ClienteDeObjetos{
 
             id = UtilidadesConsola.leerEntero();
 
-            PersonalDTO personal  = objRemoto.consultarUsuario(id);
+            PersonalDTO personal  = objRemoto.consultarPersonal(id);
             System.out.println(personal.getTipo_id());
             System.out.println(personal.getId());
             System.out.println(personal.getUsuario());

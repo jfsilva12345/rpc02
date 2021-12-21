@@ -1,9 +1,10 @@
 package servidor;
 import sop_rmi.GesUsuariosImpl;
+import java.rmi.RemoteException;
 
 public class ServidorDeObjetos{
 
-    public static void main (String args[])throws RemoteException{
+    public static void main(String args[]) throws RemoteException{
 
         int numPuertoRMIRegistry =0;
         String direccionIpRMIRegistry ="";
@@ -16,7 +17,7 @@ public class ServidorDeObjetos{
 
         try{
             UtilidadesRegistroS.arrancarNS(numPuertoRMIRegistry);
-            UtilidadesRegistroS.RegistrarObjetoRemoto(objetoRemoto, direccionIpRMIRegistry, "ObjetoRemotoPersonal");
+            UtilidadesRegistroS.RegistrarObjetoRemoto(objRemoto, direccionIpRMIRegistry, numPuertoRMIRegistry, "ObjetoRemotoPersonal");
         }catch(Exception e){
             System.err.println("No fue posible Arrancar el NS o Registrar el objeto remoto"+ e.getMessage());
         }

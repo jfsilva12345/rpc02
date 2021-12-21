@@ -18,7 +18,7 @@ public class GesUsuariosImpl extends UnicastRemoteObject implements GesUsuariosI
         System.out.println("Entrando a registrar usuario");
         boolean bandera=false;
         
-        if(personal.size() < 5)
+        if(personal.size() < 2)
         {            
             bandera=personal.add(objUsuario);
             System.out.println("Usuario registrado: identificación: " + objUsuario.getId() + ", nombres: " + objUsuario.getNombreCompleto());
